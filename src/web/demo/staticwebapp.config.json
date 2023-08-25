@@ -23,7 +23,15 @@
     "navigationFallback": {
       "rewrite": "/index.html",
       "exclude": [
-        "*.{png,jpg,gif,css,js,json,ico,svg},/login,/logout,/me"
+        "*.js",
+        "*.css",
+        "*.ico",
+        "*.png",
+        "*.jpg",
+        "*.jpeg",
+        "*.gif",
+        "*.svg",
+        "api/*"
       ]
     },
     "mimeTypes": {

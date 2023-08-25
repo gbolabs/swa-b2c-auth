@@ -1,0 +1,18 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "demo": {
+      "appLocation": ".",
+      "outputLocation": "dist/demo",
+      "appBuildCommand": "npm run build",
+      "run": "npm start",
+      "appDevserverUrl": "http://localhost:4200",
+      "apiDevserverUrl": "http://localhost:7071",
+      "deploy": {
+        "command": "npm run build",
+        "publish": "dist/demo",
+        "deploymentToken": "aff30df0ed31e655a9721b5d2e943ee0a8d87ce08770a97c29c182828e4c7b363-4d4dc439-e856-4a13-94c6-110dbc35ce4c003270092"
+      }
+    }
+  }
+}

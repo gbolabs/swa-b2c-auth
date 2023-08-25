@@ -33,9 +33,9 @@ public static class ApiControllerMapper
 		}).Produces<List<string>>()
 			.WithDescription("Returns all available roles");
 
-		app.MapPost("/api/user/validate", ([FromServices]Users users, [FromBody]ValidateB2cUserRequest reqquest) =>
+		app.MapPost("/api/user/validate", ([FromServices]Users users, ValidateB2cUserRequest validationRequest) =>
 			{
-				var exists = users.EmailList.Contains(reqquest.Email);
+				var exists = users.EmailList.Contains(validationRequest.Email);
 				
 				return exists
 					? Results.Ok(new B2cValidationAdditionalClaimsResponse())

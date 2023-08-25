@@ -22,7 +22,7 @@ namespace api.Models
 		public B2cValidationBlockResponse(string userMessage)
 		{
 			Version = "1.0.0";
-			Action = "Block";
+			Action = "ShowBlockPage";
 			UserMessage = userMessage;
 		}
 
