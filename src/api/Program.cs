@@ -51,6 +51,8 @@ app.Use(async (context, func) =>
 });
 app.MapApiControllers();
 app.MapAuditLogController();
+app.RegisterUserApis();
+app.RegisterB2CHooksApis();
 app.UseSwagger(options =>
 {
 	options.RouteTemplate = "api/{documentName}/swagger.json";

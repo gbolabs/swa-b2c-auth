@@ -4,15 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-	public static class B2cHooksController
+	public static class B2CHooksController
 	{
-		public static WebApplication RegisterB2cHooksApis(this WebApplication app)
+		public static WebApplication RegisterB2CHooksApis(this WebApplication app)
 		{
 			ArgumentNullException.ThrowIfNull(app);
 			
 			// Handle pre-token issuing hook
 			app.MapPost("/api/b2c/pretoken", ([FromServices]Users users,
-				ILogger logger,
+				[FromServices]ILogger logger,
 				PreTokenB2cHookRequest request) =>
 			{
 				ArgumentNullException.ThrowIfNull(users);
@@ -31,7 +31,7 @@ namespace api.Controllers
 				logger.LogWarning("Roles not found");
 				return Results.Ok(new PreTokenB2CHookContinueResponse(Array.Empty<string>()));
 			});
-
+			
 			return app;
 		}
 	}
