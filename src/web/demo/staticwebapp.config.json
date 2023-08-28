@@ -1,66 +1,28 @@
 {
-    "trailingSlash": "auto",
-    "routes": [
-      {
-        "route": "/login",
-        "redirect": "/.auth/login/aadb2c"
-      },
-      {
-        "route": "/logout",
-        "redirect": "/.auth/logout"
-      },
-      {
-        "route": "/me",
-        "redirect": "/.auth/me"
-      },
-      {
-        "route": "/api/user/current",
-        "allowedRoles": ["authenticated"]
-      }
-    ],
-    "forwardingGateway": {},
-    "globalHeaders": {},
-    "navigationFallback": {
-      "rewrite": "/index.html",
-      "exclude": [
-        "*.js",
-        "*.css",
-        "*.ico",
-        "*.png",
-        "*.jpg",
-        "*.jpeg",
-        "*.gif",
-        "*.svg",
-        "api/*"
+  "routes": [
+    {
+      "route": "/api",
+      "allowedRoles": [
+        "anonymous"
       ]
-    },
-    "mimeTypes": {
-      ".json": "application/json; charset=utf-8",
-      ".html": "text/html; charset=utf-8",
-      ".htm": "text/html; charset=utf-8",
-      ".js": "application/javascript; charset=utf-8",
-      ".css": "text/css; charset=utf-8",
-      ".ico": "image/x-icon"
-    },
+    }
+  ],
     "auth": {
-      "rolesSource": "/api/user/roles",
       "identityProviders": {
         "customOpenIdConnectProviders": {
           "aadb2c": {
             "registration": {
-              "clientIdSettingName": "a7c8796a-0a9b-47c6-9561-18d69d5fe526",
+              "clientIdSettingName": "AADB2C_PROVIDER_CLIENT_ID",
               "clientCredential": {
-                "clientSecretSettingName": "8.H8Q~A.IGOXNrhZ3UOTv0j0MMsAqybdkm_t6aRT"
+                "clientSecretSettingName": "AADB2C_PROVIDER_CLIENT_SECRET"
               },
               "openIdConnectConfiguration": {
-                "wellKnownOpenIdConfiguration": "https://allpuramembersdev.b2clogin.com/allpuramembersdev.onmicrosoft.com/B2C_1_Sigin/v2.0/.well-known/openid-configuration"
+                "wellKnownOpenIdConfiguration": "https://allpuramembersdev.b2clogin.com/allpuramembersdev/B2C_1_susi/v2.0/.well-known/openid-configuration"
               }
             },
-            "enabled": true,
             "login": {
               "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
-              "scopes": [
-              ],
+              "scopes": [],
               "loginParameterNames": []
             }
           }

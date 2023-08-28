@@ -2,12 +2,13 @@
   "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
   "configurations": {
     "demo": {
-      "appLocation": ".",
-      "outputLocation": "dist/demo",
+      "appLocation": "dist/demo",
+      "outputLocation": ".",
       "appBuildCommand": "npm run build",
       "run": "npm start",
       "appDevserverUrl": "http://localhost:4200",
-      "apiDevserverUrl": "http://localhost:7071",
+      "apiDevserverUrl": "http://localhost:5201",
+      "swaConfigLocation": ".",
       "deploy": {
         "command": "npm run build",
         "publish": "dist/demo",
