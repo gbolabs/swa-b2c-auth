@@ -29,7 +29,6 @@ builder.Services.AddHttpLogging(options =>
 	options.RequestBodyLogLimit = 4096;
 	options.ResponseBodyLogLimit = 4096;
 });
-
 var app = builder.Build();
 
 

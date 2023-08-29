@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace api.Models
 {
 	public abstract class PreTokenB2CHookResponseBase
@@ -12,8 +14,15 @@ namespace api.Models
 		{
 			Version = "1.0.0";
 			Action = "Continue";
-		}
+			AppRoles = roles;
+		} 
+		/// <summary>
+		/// Returns the application roles serialized as csv string named extension_AppRoles
+		/// </summary>
+		[JsonIgnore]
+		private string[] AppRoles { get; }
 		
-public string[] Roles { get; set; }	
+		[JsonPropertyName("extension_AppRoles")]
+		public string AppRolesCsv => string.Join(",", AppRoles);
 	}
 }

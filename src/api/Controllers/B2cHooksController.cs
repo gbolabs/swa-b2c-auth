@@ -12,7 +12,6 @@ namespace api.Controllers
 			
 			// Handle pre-token issuing hook
 			app.MapPost("/api/b2c/pretoken", ([FromServices]Users users,
-				[FromServices]ILogger logger,
 				PreTokenB2cHookRequest request) =>
 			{
 				ArgumentNullException.ThrowIfNull(users);
@@ -28,9 +27,20 @@ namespace api.Controllers
 					return Results.Ok(new PreTokenB2CHookContinueResponse(roles));
 				}
 
-				logger.LogWarning("Roles not found");
 				return Results.Ok(new PreTokenB2CHookContinueResponse(Array.Empty<string>()));
 			});
+			
+			app.MapPost("/api/b2c/validate", ([FromServices] Users users, ValidateB2cUserRequest validationRequest) =>
+				{
+					var exists = users.EmailList.Contains(validationRequest.Email);
+
+					return exists
+						? Results.Ok(new B2cValidationAdditionalClaimsResponse())
+						: Results.Ok(new B2cValidationBlockResponse("User not found"));
+				})
+				.Produces<B2cValidationAdditionalClaimsResponse>()
+				.Produces<B2cValidationBlockResponse>()
+				.Accepts<ValidateB2cUserRequest>("application/json");
 			
 			return app;
 		}

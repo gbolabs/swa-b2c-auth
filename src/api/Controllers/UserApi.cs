@@ -34,18 +34,6 @@ namespace api.Controllers
 				}).Produces<List<string>>()
 				.WithDescription("Returns all available roles");
 
-			app.MapPost("/api/user/validate", ([FromServices] Users users, ValidateB2cUserRequest validationRequest) =>
-				{
-					var exists = users.EmailList.Contains(validationRequest.Email);
-
-					return exists
-						? Results.Ok(new B2cValidationAdditionalClaimsResponse())
-						: Results.Ok(new B2cValidationBlockResponse("User not found"));
-				})
-				.Produces<B2cValidationAdditionalClaimsResponse>()
-				.Produces<B2cValidationBlockResponse>()
-				.Accepts<ValidateB2cUserRequest>("application/json");
-
 			app.MapGet("/api/users", ([FromServices] Users users) => users.EmailList.ToArray())
 				.Produces<string[]>()
 				.WithDescription("Returns all available users");

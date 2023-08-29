@@ -1,32 +1,70 @@
 {
-    "auth": {
-      "identityProviders": {
-        "customOpenIdConnectProviders": {
-          "aadb2c": {
-            "registration": {
-              "clientIdSettingName": "AADB2C_PROVIDER_CLIENT_ID",
-              "clientCredential": {
-                "clientSecretSettingName": "AADB2C_PROVIDER_CLIENT_SECRET"
-              },
-              "openIdConnectConfiguration": {
-                "wellKnownOpenIdConfiguration": "https://allpuramembersdev.b2clogin.com/allpuramembersdev.onmicrosoft.com/B2C_1_susi/v2.0/.well-known/openid-configuration"
-              }
+  "trailingSlash": "auto",
+  "routes": [
+    {
+      "route": "/api/b2c/*",
+      "allowedRoles": [
+        "anonymous"
+      ]
+    },
+    {
+      "route": "/api/user*",
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE"
+      ],
+      "allowedRoles": [
+        "anonymous"
+      ]
+    },
+    {
+      "route": "/*",
+      "allowedRoles": [
+        "authenticated"
+      ]
+    }
+  ],
+  "responseOverrides": {
+    "401": {
+      "redirect": "/.auth/login/aadb2c",
+      "statusCode": 302
+    }
+  },
+  "forwardingGateway": {},
+  "globalHeaders": {},
+  "mimeTypes": {
+    ".json": "application/json; charset=utf-8",
+    ".html": "text/html; charset=utf-8",
+    ".htm": "text/html; charset=utf-8",
+    ".js": "application/javascript; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".ico": "image/x-icon"
+  },
+  "auth": {
+    "rolesSource": "/api/user/roles",
+    "identityProviders": {
+      "customOpenIdConnectProviders": {
+        "aadb2c": {
+          "registration": {
+            "clientIdSettingName": "AADB2C_PROVIDER_CLIENT_ID",
+            "clientCredential": {
+              "clientSecretSettingName": "AADB2C_PROVIDER_CLIENT_SECRET"
             },
-            "login": {
-              "nameClaimType": "name",
-              "scopes": [
-                "openid"
-              ]
+            "openIdConnectConfiguration": {
+              "wellKnownOpenIdConfiguration": "https://allpuramembersdev.b2clogin.com/allpuramembersdev.onmicrosoft.com/B2C_1_susi/v2.0/.well-known/openid-configuration"
             }
+          },
+          "enabled": true,
+          "login": {
+            "nameClaimType": "name",
+            "scopes": [
+              "openid"
+            ],
+            "loginParameterNames": []
           }
         }
       }
-    },
-    "navigationFallback": {
-        "rewrite": "index.html",
-        "exclude": [
-            "/images/*.{svg,png,jpg,gif,webp}",
-            "/css/*"
-        ]
     }
   }
+}
